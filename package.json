@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "faker": "^6.6.6",
+    "uuid": "^9.0.0"
+  },
+  "name": "airline-system",
+  "description": "![Alt text](image-1.png)",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "@faker-js/faker": "^8.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
