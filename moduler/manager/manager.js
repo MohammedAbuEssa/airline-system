@@ -1,10 +1,16 @@
 "use strict";
+require("dotenv").config();
 
-const event = require("./events");
+// const event = require("../events");
 // const { faker } = require("@faker-js/faker");
 // const uuid = require("uuid");
 
-event.on("new-flight", (payload) => {
+const port = process.env.PORT || 3030;
+const io = require("socket.io-client");
+let host = `http://localhost:${port}/`;
+const systemConnection = io.connect(host);
+
+systemConnection.on("new-flight", (payload) => {
   console.log(
     `Manager: new flight with ID ${payload.flightID} have been scheduled`
   );
@@ -16,7 +22,7 @@ event.on("new-flight", (payload) => {
 //   pilotSecondtName: faker.person.lastName(),
 // };
 
-event.on("arrived", (payload) => {
+systemConnection.on("arrived", (payload) => {
   console.log(
     `Manager: We're greatly thankful for the amazing flight, ${payload.pilot} `
   );
