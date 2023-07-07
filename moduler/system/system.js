@@ -1,13 +1,16 @@
 "use strict";
-
-const event = require("../events");
+require("dotenv").config();
+// const event = require("../events");
 const pilotName = require("../manager/manager");
 const { faker } = require("@faker-js/faker");
+
+const port = process.env.PORT || 3030;
+const ioServer = require("socket.io")(port);
 
 require("../manager/manager.js");
 require("../pilot/pilot.js");
 
-event.on("new-flight", (payload) => {
+ioServer.on("new-flight", (payload) => {
   console.log("Flight:");
   console.log({
     event: "new-flight",
@@ -16,7 +19,7 @@ event.on("new-flight", (payload) => {
   });
 });
 
-event.on("took-off", (payload) => {
+ioServer.on("took-off", (payload) => {
   console.log("Flight:");
   console.log({
     event: "took_off",
@@ -25,7 +28,7 @@ event.on("took-off", (payload) => {
   });
 });
 
-event.on("arrived", (payload) => {
+ioServer.on("arrived", (payload) => {
   console.log("Flight:");
   console.log({
     event: "arrived",
@@ -46,7 +49,7 @@ setInterval(() => {
     destination,
   };
 
-  event.emit("new-flight", payload);
+  ioServer.emit("new-flight", payload);
 }, 10000);
 
 // console.log(
