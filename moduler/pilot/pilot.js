@@ -2,14 +2,15 @@
 require("dotenv").config();
 
 // const event = require("../events");
-const flight = require("../manager/manager");
-const { faker } = require("@faker-js/faker");
+// const flight = require("../manager/manager");
+// const { faker } = require("@faker-js/faker");
 
 require("../manager/manager.js");
+require("../system/system.js");
 
 const port = process.env.PORT || 3030;
 const io = require("socket.io-client");
-let host = `http://localhost:${port}/`;
+let host = `http://localhost:${port}/airline`;
 const systemConnection = io.connect(host);
 
 systemConnection.on("new-flight", (payload) => {
@@ -21,7 +22,7 @@ systemConnection.on("new-flight", (payload) => {
   setTimeout(() => {
     systemConnection.emit("arrived", payload);
     console.log(`Pilot: Flight with ID '${payload.flightID}' has arrived`);
-  }, 7000);
+  }, 3000);
 });
 
 // event.on("took-off", flighEvemtListner);

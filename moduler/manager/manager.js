@@ -11,9 +11,11 @@ let host = `http://localhost:${port}/`;
 const systemConnection = io.connect(host);
 
 systemConnection.on("new-flight", (payload) => {
-  console.log(
-    `Manager: new flight with ID ${payload.flightID} have been scheduled`
-  );
+  setTimeout(() => {
+    console.log(
+      `Manager: new flight with ID ${payload.flightID} have been scheduled`
+    );
+  }, 10000);
 });
 
 // let flight = {

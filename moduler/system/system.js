@@ -10,6 +10,9 @@ const ioServer = require("socket.io")(port);
 require("../manager/manager.js");
 require("../pilot/pilot.js");
 
+//New
+const airline = ioServer.of("/airline");
+
 ioServer.on("new-flight", (payload) => {
   console.log("Flight:");
   console.log({
@@ -35,6 +38,12 @@ ioServer.on("arrived", (payload) => {
     time: new Date().toLocaleString(),
     Details: payload,
   });
+});
+
+//New
+airline.on("connection", (payload) => {
+  // console.log("connected to airline system ", socket.id);
+  // airline.emit("took-off", payload);
 });
 
 setInterval(() => {
